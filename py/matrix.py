@@ -1,4 +1,12 @@
 # Matrix class in Python
+epsilon = 1e-6
+def correct_float_error(f):
+    # Takes a float and rounds to integer if it is close enough
+    if abs(f - round(f)) < epsilon:
+        return round(f)
+    else:
+        return f
+
 class Matrix:
     def __init__(self, rows, cols):
         self.rows = rows
@@ -125,7 +133,7 @@ class Matrix:
         for i in range(self.rows):
             lines[i+1] = "│"
             for j in range(self.cols):
-                lines[i+1] += "\t" + str(self.data[i][j])
+                lines[i+1] += "\t" + str(correct_float_error(self.data[i][j]))
             lines[i+1] += "\t│"
         lines[self.rows+1] = "└\t"
         for i in range(self.cols):
